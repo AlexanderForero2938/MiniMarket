@@ -11,16 +11,12 @@ create function modificar_nombre_marca_producto(
 returns varchar(100)
 deterministic
 begin
-	declare existe_marca int;
     
-    select count(*) 
-    into existe_marca
-    from marca_producto
-    where nombre_marca_producto = upper(p_nuevo_nombre_marca_producto);
-    
-    if existe_marca > 0 then
-    return 'Esa marca ya se encuentra registrada en el sistema.';
-    end if;
+    if exists(
+		select 1 from marca_producto where nombre_marca_producto = upper(p_nuevo_nombre_marca_producto)
+    ) then
+		return 'Esa maraca ya se encuentra registrada en el sistema.';
+	end if;
     
     update marca_producto
 		set nombre_marca_producto = upper(p_nuevo_nombre_marca_producto)

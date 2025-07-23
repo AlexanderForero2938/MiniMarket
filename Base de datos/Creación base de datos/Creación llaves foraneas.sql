@@ -24,6 +24,12 @@ add constraint fk_id_cliente foreign key(id_cliente) references cliente(id_clien
 alter table factura
 add constraint fk_id_empleado foreign key(id_empleado) references empleado(id_empleado);
 
+alter table factura
+add constraint fk_id_annio_factura foreign key(id_annio_factura) references annio_factura(id_annio_factura);
+
+alter table factura
+add constraint fk_id_metodo_pago foreign key(id_metodo_pago) references metodo_pago(id_metodo_pago);
+
 -- Llave foranea tabla detalle_factura.
 alter table detalle_factura
 add constraint fk_numero_factura foreign key(numero_factura) references factura(numero_factura);
